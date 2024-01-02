@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="static/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(242, 244, 244);
+            color: rgb(38, 67, 84);
+            font-size: 1em;
+            margin: 0;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                font-size: 1.5em;
+            }
+
+            .img-fluid {
+                width: 100%;
+            }
+
+            td img {
+                width: 100%;
+            }
+
+            .booking-details-card {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            body {
+                font-size: 1.5em;
+            }
+
+            .img-fluid {
+                width: 50%;
+            }
+
+            td img {
+                width: 50%;
+            }
+
+            .booking-details-card {
+                margin-top: 20px;
+            }
+        }
+
+        #content {
+            min-height: 100%;
+            margin-bottom: -100px;
+            padding-bottom: 100px;
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        .footer-icon {
+            margin: 0 5px;
+            font-size: 1.5em;
+        }
+
+        .custom-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .booking-details-card {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid custom-container">
+        <h1>Booking Confirmation</h1>
+
+        <div class="booking-details-card">
+            {% if bookings %}
+            {% for booking in bookings %}
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Booking Details</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Bus Name:</strong> {{ booking.bus.bus_name }}</li>
+                        <li class="list-group-item"><strong>Selected Seat:</strong> {{ booking.seat_number }}</li>
+
+                        <!-- Add other fields as needed -->
+                    </ul>
+                    <button class="cancel-btn mt-3" onclick="">Cancel Booking</button>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No bookings available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="fixed-bottom  text-white p-3" style="background-color: rgb(39, 39, 78);">
+        <div class="row">
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-house-door-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-person-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-geo-alt-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-exclamation-lg"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="" style="color: white;"><span class="footer-icon"><i class="bi bi-bus-fill"></i></span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <script>
+        function cancelBooking(bookingId) {
+            // Add your cancel booking logic here
+            alert('Booking canceled for ID: ' + bookingId);
+        }
+    </script>
+</body>
+
+</html>

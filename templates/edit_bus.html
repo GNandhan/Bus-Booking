@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Bus Details</title>
+    <link rel="icon" href="static/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(242, 244, 244);
+            color: rgb(38, 67, 84);
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            /* Adjust the value as needed */
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        #content {
+            min-height: 100%;
+            margin-bottom: -100px;
+            padding-bottom: 100px;
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                font-size: 0.9em;
+                /* Adjust the font size for smaller screens */
+            }
+
+            .container {
+                padding: 0 15px;
+                /* Add some padding for better mobile view */
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+                /* Reduce margin for better spacing */
+            }
+
+            #footer {
+                padding: 3px;
+                /* Reduced padding for the footer */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <h1>Edit Bus Details</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form method="post" action="{{ url_for('edit_bus', bus_id=bus_id) }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.bus_name.label(class="form-control-label") }}
+                {{ form.bus_name(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.starting_point.label(class="form-control-label") }}
+                {{ form.starting_point(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.ending_point.label(class="form-control-label") }}
+                {{ form.ending_point(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.total_seats.label(class="form-control-label") }}
+                {{ form.total_seats(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.time_duration.label(class="form-control-label") }}
+                {{ form.time_duration(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.departure_time.label(class="form-control-label") }}
+                {{ form.departure_time(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary", value="Edit Bus") }}
+                <!-- Update the value attribute to "Edit Bus" -->
+            </div>
+        </form>
+    </div>
+
+    <div id="footer" class="fixed-bottom text-white" style="background-color:  rgb(39, 39, 78);">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <a href="{{ url_for('dashboard') }}" style="color: white;"><span
+                            class="bi bi-house-door-fill"></span></a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('dashboard') }}" style="color: white;"><span
+                            class="bi bi-person-fill"></span></a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('dashboard') }}" style="color: white;"><span
+                            class="bi bi-geo-alt-fill"></span></a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('dashboard') }}" style="color: white;"><span
+                            class="bi bi-exclamation-lg"></span></a>
+                </div>
+                <div class="col-2">
+                    <a href="" style="color: white;"><span class="bi bi-bus-fill"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

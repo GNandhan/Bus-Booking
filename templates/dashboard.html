@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="static/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(242, 244, 244);
+            color: rgb(38, 67, 84);
+            height: 100%;
+            font-size: 1em;
+            margin: 0;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                font-size: 0.9em; /* Adjusted font size for mobile */
+            }
+
+            .img-fluid {
+                width: 40%;
+            }
+
+            td img {
+                width: 30%;
+            }
+
+            .card.bus-card {
+                margin-bottom: 10px; /* Adjusted margin for smaller cards */
+            }
+
+            #footer {
+                position: relative;
+                padding: 5px; /* Reduced padding for the footer */
+            }
+
+            .footer-icon {
+                font-size: 1em; /* Adjusted font size for footer icons */
+            }
+        }
+
+        @media (max-width: 1440px) {
+            body {
+                font-size: 1.5em;
+            }
+
+            .img-fluid {
+                width: 20%;
+            }
+
+            td img {
+                width: 25%;
+            }
+        }
+
+        #content {
+            /* min-height: 100%; */
+            margin-bottom: -100px;
+            padding-bottom: 100px;
+        }
+
+        #footer {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        .footer-icon {
+            margin: 0 5px;
+            font-size: 1.5em;
+        }
+
+        .custom-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid custom-container">
+        <h1>Bus Details</h1>
+
+        <div class="row">
+            {% for bus in bus_details %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card bus-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ bus.bus_name }}</h5>
+                            <p class="card-text">Starting Point: {{ bus.starting_point }}</p>
+                            <p class="card-text">Ending Point: {{ bus.ending_point }}</p>
+                            <p class="card-text">Departure:{{bus.departure_time}}</p>
+                            <a href="{{ url_for('book_bus', bus_id=bus.id) }}" class="btn btn-primary btn-book-bus">Book
+                                Bus</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <div id="footer" class="fixed-bottom  text-white " style="background-color: rgb(39, 39, 78);">
+        <div class="row">
+            <div class="col-lg col-md col-sm col ">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-house-door-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-person-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-geo-alt-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-exclamation-lg col-md col-sm col"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="" style="color: white;"><span class="footer-icon"><i class="bi bi-bus-fill"></i></span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

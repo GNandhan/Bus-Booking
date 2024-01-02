@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bus Details</title>
+    <link rel="icon" href="static/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(242, 244, 244);
+            color: rgb(38, 67, 84);
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .custom-container {
+            max-width: 500px;
+            /* Adjust the value as needed */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                font-size: 0.8em;
+                /* Adjust the font size as needed */
+            }
+
+            .img-fluid {
+                width: 100%;
+            }
+
+            td img {
+                width: 100%;
+            }
+
+            .custom-container {
+                max-width: 100%;
+                /* Adjust the value as needed */
+                padding: 0 10px;
+                /* Add some padding for better mobile view */
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+                /* Reduce margin for better spacing */
+            }
+
+            #footer {
+                padding: 5px;
+                /* Reduced padding for the footer */
+            }
+
+            .footer-icon {
+                font-size: 1em;
+                /* Adjusted font size for the footer icons */
+            }
+        }
+
+        #content {
+            min-height: 100%;
+            margin-bottom: -100px;
+            padding-bottom: 100px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        .footer-icon {
+            margin: 0 5px;
+            font-size: 0.9em;
+            /* Adjusted font size for the footer icons */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Add Bus Details</h1>
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
+
+                        <form method="post" action="{{ url_for('add_bus') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.bus_name.label(class="form-control-label") }}
+                                {{ form.bus_name(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.starting_point.label(class="form-control-label") }}
+                                {{ form.starting_point(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.ending_point.label(class="form-control-label") }}
+                                {{ form.ending_point(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.total_seats.label(class="form-control-label") }}
+                                {{ form.total_seats(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.time_duration.label(class="form-control-label") }}
+                                {{ form.time_duration(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.departure_time.label(class="form-control-label") }}
+                                {{ form.departure_time(class="form-control") }}
+                            </div>
+                            <div class="form-group text-center">
+                                {{ form.submit(class="btn btn-primary") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="fixed-bottom text-white p-2" style="background-color: rgb(39, 39, 78);">
+        <div class="row">
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-house-door-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-person-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-geo-alt-fill"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="{{ url_for('dashboard') }}" style="color: white;"><span class="footer-icon"><i
+                            class="bi bi-exclamation-lg"></i></span></a>
+            </div>
+            <div class="col-lg col-md col-sm col">
+                <a href="" style="color: white;"><span class="footer-icon"><i class="bi bi-bus-fill"></i></span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
